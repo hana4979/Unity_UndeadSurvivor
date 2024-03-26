@@ -98,6 +98,7 @@ public class Enemy : MonoBehaviour
         {
             // .. Live, Hit Action
             anim.SetTrigger("Hit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit); // 피격 사운드
         }
         else
         {
@@ -109,6 +110,9 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Dead", true);
             GameManager.instance.kill++; // 킬수 증가
             GameManager.instance.GetExp();
+
+            if(GameManager.instance.isLive) // 게임 진행 도중에만 효과음 재생
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead); // 사망 사운드
         }
     }
 

@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(true); // player 오브젝트 활성화
         uiLevelUp.Select(playerId % 2); // 무기 쥐어주기
         Resume(); // 게임 재시작 후에도 정상적으로 작동
+
+        AudioManager.instance.PlayBgm(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     // 게임 오버 로직
@@ -55,6 +58,9 @@ public class GameManager : MonoBehaviour
         uiResult.gameObject.SetActive(true);
         uiResult.Lose();
         Stop(); // 시간 멈춤
+
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
 
     // 게임 승리 로직
@@ -73,6 +79,9 @@ public class GameManager : MonoBehaviour
         uiResult.gameObject.SetActive(true);
         uiResult.Win();
         Stop(); // 시간 멈춤
+
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
     }
 
     public void GameRetry()

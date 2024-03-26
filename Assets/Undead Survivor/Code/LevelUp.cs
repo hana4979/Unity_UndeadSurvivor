@@ -19,6 +19,8 @@ public class LevelUp : MonoBehaviour
         Next();
         rect.localScale = Vector3.one;
         GameManager.instance.Stop();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.instance.EffectBgm(true); // 레벨 업 Ui가 나타날 때 필터 on
     }
 
     // 패널 숨김
@@ -26,6 +28,8 @@ public class LevelUp : MonoBehaviour
     {
         rect.localScale = Vector3.zero;
         GameManager.instance.Resume();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.EffectBgm(false); // 레벨 업 Ui가 사라질 때 필터 off
     }
 
     // 버튼 대신 눌러주는 함수

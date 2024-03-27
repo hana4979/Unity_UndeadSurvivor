@@ -22,7 +22,8 @@ public class Bullet : MonoBehaviour
         this.per = per;
 
         // 관통이 -1(무한)보다 큰 것에 대해서는 속도 적용
-        if (per > -1)
+        // --> 관통력이 0보다 큰 것에 대해서 속도 적용
+        if (per >= 0)
         {
             // velocity : 속도
             rigid.velocity = dir * 15; // 속력을 곱해주어 총알이 날아가는 속도 증가시키기
@@ -31,12 +32,12 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || per == -1)
+        if (!collision.CompareTag("Enemy") || per == -100)
             return;
 
         per--; // 관통력 줄어듦
 
-        if(per == -1) // 역할을 다 함
+        if(per < 0) // 역할을 다 함
         {
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false); // 비활성화, 오브젝트 풀링으로 관리
@@ -44,4 +45,12 @@ public class Bullet : MonoBehaviour
 
     }
     
+    // 총알이 Area를 벗어나거나 관통력을 다 했다면 비활성화
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Area") || per == -100)
+            return;
+
+        gameObject.SetActive(false); // 비활성화
+    }
 }

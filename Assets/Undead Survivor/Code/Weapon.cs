@@ -134,7 +134,7 @@ public class Weapon : MonoBehaviour
             //‘bullet’ 오브젝트를 월드 공간에서 위쪽 방향으로 1.5만큼 이동
             // Translate 함수로 자신의 위쪽으로 이동
             bullet.Translate(bullet.up * 1.5f, Space.World);
-            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); // -1 is Infinity Per.
+            bullet.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); // -1 is Infinity Per. --> 관통력 -100 수정
 
         }
     }

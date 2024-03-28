@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public LevelUp uiLevelUp; // 레벨업 팝업 컨트롤
     public Result uiResult; // 게임결과 팝업 컨트롤
+    public Transform uiJoy; // 조이스틱 오브젝트
     public GameObject enemyCleaner;
 
     void Awake()
@@ -89,6 +90,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0); // 씬 재시작
     }
 
+    public void GameQuit()
+    {
+        Application.Quit(); // 어플리케이션 종료
+    }
+
+
     void Update()
     {
         if (!isLive)
@@ -125,11 +132,13 @@ public class GameManager : MonoBehaviour
         isLive = false;
         // timeScale : 유니티의 시간 속도(배율)
         Time.timeScale = 0; // 0 : 시간이 멈춤
+        uiJoy.localScale = Vector3.zero; // uiJoy의 스케일 0
     }
 
     public void Resume()
     {
         isLive = true;
         Time.timeScale = 1;
+        uiJoy.localScale = Vector3.one; // uiJoy의 스케일 1
     }
 }

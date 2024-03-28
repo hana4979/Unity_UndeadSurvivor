@@ -38,10 +38,11 @@ public class Player : MonoBehaviour
         if (!GameManager.instance.isLive)
             return;
 
+        /*
         // GetAxis : 축에 대한 값, 입력 값이 부드럽게 바뀜
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
-
+        */
     }
     
 
